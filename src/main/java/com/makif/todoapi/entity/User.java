@@ -8,7 +8,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "USER")
-public class User implements UserDetails {
+public class User extends AuditModel implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +19,19 @@ public class User implements UserDetails {
 
     @Column(name = "PASSWORD", nullable = false)
     private String password;
+
+    public User() {
+    }
+
+    public User(Long id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
